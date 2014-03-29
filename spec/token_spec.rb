@@ -18,8 +18,8 @@ describe Token do
     it "initializes with @input, @index, and @token set" do
       test_token = Token.new("this is a test", 2)
 
-      test_token.index.should eq 2
-      test_token.token.should eq "i"
+      expect(test_token.index).to eq 2
+      expect(test_token.token).to eq "i"
     end
   end
 
@@ -29,7 +29,7 @@ describe Token do
       test_token2 = Token.new("this is a test", 5)
       test_token.count_matches
 
-      test_token.stats[:number_of_matches].should eq 2
+      expect(test_token.stats[:number_of_matches]).to eq 2
     end
   end
 
