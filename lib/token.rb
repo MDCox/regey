@@ -39,6 +39,22 @@ class Token
     end
   end
 
+  def is_whitespace?
+    stats[:is_whitespace] = token.match(/\S/).nil?
+  end
+
+  def is_letter?
+    stats[:is_letter] = token.match(/\W/).nil?
+  end
+
+  def is_digit?
+    stats[:is_digit] = token.match(/\D/).nil?
+  end
+
+  def is_upcase?
+    stats[:is_upcase] = !(token.match(/[A-Z]/).nil?)
+  end
+
   def self.all
     @@all
   end

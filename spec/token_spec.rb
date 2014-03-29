@@ -86,4 +86,48 @@ describe Token do
       expect(test_token.stats[:all_matched]).to eq true
     end
   end
+
+  describe "is_whitespace?" do
+    it "checks if token is whitespace" do
+     test_token = Token.new("this is a test", 4)
+     test_token2 = Token.new("this is a test", 5)
+     
+     test_token.is_whitespace?
+     test_token2.is_whitespace?
+
+     expect(test_token.stats[:is_whitespace]).to eq true
+     expect(test_token2.stats[:is_whitespace]).to eq false
+    end
+  end
+
+  describe "is_letter?" do
+    it "checks if token is a letter" do
+      test_token = Token.new("this is a test", 0)
+      test_token.is_letter?
+
+      expect(test_token.stats[:is_letter]).to eq true
+    end
+  end
+
+  describe "is_digit?" do
+    it "checks if token is a digit" do
+      test_token = Token.new("this is a test2", -1)
+      test_token.is_digit?
+
+      expect(test_token.stats[:is_digit]).to eq true
+    end
+  end
+
+  describe "is_upcase?" do
+    it "checks if token is uppercase" do
+      test_token = Token.new("This is a test", 0)
+      test_token2 = Token.new("This is a test", 1)
+
+      test_token.is_upcase?
+      test_token2.is_upcase?
+
+      expect(test_token.stats[:is_upcase]).to eq true
+      expect(test_token2.stats[:is_upcase]).to eq false
+    end
+  end
 end
