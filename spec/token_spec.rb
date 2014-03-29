@@ -24,12 +24,12 @@ describe Token do
   end
 
   describe "count_matches" do
-    it "saves number of all token matches to @stats[:number_of_matches]" do
+    it "saves number of all token matches to @stats[:match_count]" do
       test_token = Token.new("this is a test", 2)
       test_token2 = Token.new("this is a test", 5)
       test_token.count_matches
 
-      expect(test_token.stats[:number_of_matches]).to eq 2
+      expect(test_token.stats[:match_count]).to eq 2
     end
   end
 
@@ -66,6 +66,24 @@ describe Token do
       test_token.start_of_word
 
       expect(test_token.stats[:start_of_word]).to eq true
+    end
+  end
+
+  describe "all_matched" do
+    it "checks if all instances of token in input are matched" do
+      test_token = Token.new("this is a test", 3)
+      test_token2 = Token.new("this is a test", 6)
+
+      test_token.count_matches
+      test_token.all_matched
+
+      expect(test_token.stats[:all_matched]).to eq false
+
+      test_token3 = Token.new("this is a test", 12)
+      test_token.count_matches
+      test_token.all_matched
+
+      expect(test_token.stats[:all_matched]).to eq true
     end
   end
 end

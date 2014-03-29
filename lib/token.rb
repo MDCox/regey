@@ -1,6 +1,5 @@
 class Token
-  attr_reader :input, :index, :token,
-              :stats
+  attr_reader :input, :index, :token, :stats
 
   @@all = []
 
@@ -14,12 +13,16 @@ class Token
   end
 
   def count_matches
-    stats[:number_of_matches] = 0
+    stats[:match_count] = 0
     Token.all.each do |token|
       if token.token == self.token
-        stats[:number_of_matches] += 1
+        stats[:match_count] += 1
       end
     end
+  end
+
+  def all_matched
+    stats[:all_matched] = (input.scan(/#{token}/).size == stats[:match_count])
   end
 
   def start_of_input
