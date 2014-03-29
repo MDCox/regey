@@ -4,9 +4,9 @@ Regey
 Regey takes test cases from the user and returns a valid regex for all test cases.
 
 -----
-###Dependancies
+###Dependencies
 
-  - No dependancies right now, but will eventually run on rails for a better user experience.
+  - No dependecies other than ruby right now, but will eventually run on rails for a better user experience.
 
 
 ### Current features
