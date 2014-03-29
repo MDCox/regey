@@ -23,10 +23,13 @@ License
 ----
 
 Extended beerware license:
-  ```
-If you find this app useful, and you run into anyone in real life who has contributed to this project, feel free to buy that person a beer/coffee/social-beverage to thank them for their work.
+
+> If you find this app useful, 
+>  and you run into anyone in real life who has contributed,
+>  feel free to buy that person a beer/coffee/social-beverage
+>  to thank them.
 
 Otherwise, do what you will.
-  ```
+
   ---------
   proudly written in ruby.
