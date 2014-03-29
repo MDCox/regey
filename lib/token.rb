@@ -1,6 +1,6 @@
 class Token
   attr_reader :input, :index, :token,
-              :number_of_matches
+              :stats
 
   @@all = []
 
@@ -8,15 +8,30 @@ class Token
     @input = input
     @index = index
     @token = input[index]
+    @stats = {}
 
     @@all << self
   end
 
   def count_matches
-    @number_of_matches = 0
+    stats[:number_of_matches] = 0
     Token.all.each do |token|
       if token.token == self.token
-        @number_of_matches += 1
+        stats[:number_of_matches] += 1
+      end
+    end
+  end
+
+  def start_of_input
+    stats[:start_of_input] = (@index == 0) 
+  end
+
+  def start_of_word
+    stats[:start_of_word] = false
+    
+    input.split.each do |word|
+      if word[0..token.length-1] == token
+        stats[:start_of_word] = true
       end
     end
   end

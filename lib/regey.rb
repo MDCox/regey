@@ -23,3 +23,4 @@ def build_single_match(tokens)
 
   match_array.join("|")
 end
+
