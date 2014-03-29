@@ -1,8 +1,7 @@
 def regey(input, index_select)
-  regex_array = []
   tokens = make_tokens(input, index_select)
 
-  tokens
+  build_single_match(tokens)
 end
 
 def make_tokens(input, index_select)
@@ -13,4 +12,14 @@ def make_tokens(input, index_select)
   end
 
   tokens
+end
+
+def build_single_match(tokens)
+  match_array = []
+
+  tokens.each do |token|
+    match_array << "(#{token.token})"
+  end
+
+  match_array.join("|")
 end
