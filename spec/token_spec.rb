@@ -44,6 +44,13 @@ describe Token do
       expect(test_token.stats[:start_of_input]).to eq true
       expect(test_token_false.stats[:start_of_input]).to eq false
     end
+
+    it "works with multi-character tokens" do
+      test_token = Token.new("this is a test", 0..4)
+      test_token.start_of_input
+
+      expect(test_token.stats[:start_of_input]).to eq true
+    end
   end
 
   describe "start_of_word" do

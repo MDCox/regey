@@ -37,7 +37,11 @@ class Token
   end
 
   def start_of_input
-    stats[:start_of_input] = (@index == 0)
+    if @index.class == Range
+      stats[:start_of_input] = @index.include?(0)
+    else
+      stats[:start_of_input] = (@index == 0)
+    end
   end
 
   def start_of_word
