@@ -19,7 +19,27 @@ describe "make_tokens" do
 
   it "is able to accept a range as an index" do
     token_array = make_tokens("test", [0..2])
-    
+
     expect(token_array[0].token).to eq "tes"
+  end
+end
+
+describe "build_single_match" do
+  it "returns a formated match group for regex" do
+    regex = build_single_match([Token.new("this is a test", 1)])
+    expect(regex).to eq "(h)"
+  end
+
+  it "works for multiple tokens" do
+    regex = build_single_match([Token.new("this is a test", 1),
+                                Token.new("this is a test", 3)])
+
+    expect(regex).to eq "(h)|(s)"
+  end
+
+  it "removes duplicate/redundant tokens" do
+    regex = build_single_match([Token.new("this is a test", 1),
+                                Token.new("this is a test", 1)])
+    expect(regex).to eq "(h)"
   end
 end

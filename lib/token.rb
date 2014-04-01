@@ -12,6 +12,17 @@ class Token
     @@all << self
   end
 
+  def evaluate
+    count_matches
+    all_matched
+    start_of_input
+    start_of_word
+    is_whitespace?
+    is_letter?
+    is_digit?
+    is_upcase?
+  end
+
   def count_matches
     stats[:match_count] = 0
     Token.all.each do |token|
@@ -26,12 +37,12 @@ class Token
   end
 
   def start_of_input
-    stats[:start_of_input] = (@index == 0) 
+    stats[:start_of_input] = (@index == 0)
   end
 
   def start_of_word
     stats[:start_of_word] = false
-    
+
     input.split.each do |word|
       if word[0..token.length-1] == token
         stats[:start_of_word] = true

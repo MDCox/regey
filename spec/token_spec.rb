@@ -4,12 +4,12 @@ require "spec_helper"
 # Most tests use "this is a test" as it's input.           #
 # For ease of reading, here is the index of each character.#
 #                                                          #
-#         t h i s   i s   a   t  e  s  t                   #          
+#         t h i s   i s   a   t  e  s  t                   #
 #         0 1 2 3 4 5 6 7 8 9 10 11 12 13                  #
 ############################################################
 
 describe Token do
-  
+
   before(:each) do
     Token.clear_all
   end
@@ -85,13 +85,22 @@ describe Token do
 
       expect(test_token.stats[:all_matched]).to eq true
     end
+
+    it "checks if all instances of a token in input are matched" do
+      test_token = Token.new("this is a test", 1)
+
+      test_token.count_matches
+      test_token.all_matched
+
+      expect(test_token.stats[:all_matched]).to eq true
+    end
   end
 
   describe "is_whitespace?" do
     it "checks if token is whitespace" do
      test_token = Token.new("this is a test", 4)
      test_token2 = Token.new("this is a test", 5)
-     
+
      test_token.is_whitespace?
      test_token2.is_whitespace?
 
