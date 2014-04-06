@@ -22,4 +22,6 @@ loop do
   end
 end
 
-puts "/#{regey(input, indexes)}/"
+regey(input, indexes).each do |regex|
+  puts "/#{regex}/"
+end

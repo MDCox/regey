@@ -1,14 +1,23 @@
 def regey(input, index_select)
-  regex = ""
+  token_attributes = ["start_of_input",
+                      "all_matched"  ]
 
-  tokens = make_tokens(input, index_select)
+  tokens = make_tokens(input, index_select).uniq {|t| t.token }
 
   tokens.each{|token| token.evaluate}
 
-  regex += build_start_of_input(tokens.select { |token| token.token if token.start_of_input})
-  regex += build_single_match(tokens.select { |token| token.token if token.all_matched})
+  regexes = []
+  tokens.length.times { regexes << "" }
 
-  regex
+  tokens.each do |token|
+    token_attributes.each do |attribute|
+      if eval("token.stats[:#{attribute}]")
+        regexes.map! { |regex| regex += eval("build_#{attribute}(token.token)")}
+      end
+    end
+  end
+
+  regexes.uniq
 end
 
 def make_tokens(input, index_select)
@@ -21,24 +30,10 @@ def make_tokens(input, index_select)
   tokens
 end
 
-def build_single_match(tokens)
-  match_array = []
-
-  tokens.each do |token|
-    match_array << "(#{token.token})"
-  end
-
-  match_array.uniq.join("|")
+def build_all_matched(token)
+    "(#{token})"
 end
 
-def build_start_of_input(tokens)
-  tokens = tokens.map{|token| token.token}
-
-  tokens_str = tokens.join("|")
-  if tokens_str != ""
-    puts tokens_str
-    "^[#{tokens_str}]"
-  else
-    ""
-  end
+def build_start_of_input(token)
+    "^[#{token}]"
 end
